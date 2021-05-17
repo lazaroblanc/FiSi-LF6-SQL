@@ -7,14 +7,13 @@ WHERE Products.UnitPrice >= 50;
 # 2. Wie viele Bestellungen gab es im Jahr 1996?
 
 SELECT COUNT(OrderDate) AS 'Bestellungen' FROM Orders
-WHERE OrderDate >= '1996-01-01'AND OrderDate <= '1996-12-31';
+WHERE YEAR(OrderDate) = 1996
 
 
 # 3. Welche Artikel müssen nachbestellt werden?
 
 SELECT * FROM Products
-WHERE UnitsInStock = 0
-AND UnitsOnOrder = 0
+WHERE (UnitsInStock + UnitsOnOrder) <= ReorderLevel
 AND Discontinued = 0
 
 
@@ -23,7 +22,7 @@ AND Discontinued = 0
 SELECT SUM(OrderTotal) AS 'Gesamtumsatz' FROM (
     SELECT Orders.OrderDate, Orders.OrderID, SUM(Order_Details.UnitPrice * Order_Details.Quantity * (1 - Order_Details.Discount)) AS 'OrderTotal' FROM Orders
     JOIN Order_Details ON Orders.OrderID = Order_Details.OrderID
-    WHERE Orders.OrderDate >= '1997-01-01'AND Orders.OrderDate <= '1997-12-31'
+    WHERE YEAR(Orders.OrderDate) = '1997'
     GROUP BY OrderID
 ) AS Orders1997
 
@@ -41,5 +40,5 @@ GROUP BY YEAR(OrderDate)
 
 SELECT ProductID, SUM(Quantity) AS 'Quantity' FROM Order_Details
 GROUP BY ProductID
-ORDER  BY Quantity DESC
+ORDER BY Quantity DESC
 LIMIT 20
