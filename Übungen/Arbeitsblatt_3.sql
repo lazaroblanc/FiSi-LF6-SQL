@@ -1,4 +1,4 @@
-# 1. Schreiben Sie eine Abfrage, die Ihnen alle Kundennamen (Comapynname) ausgibt, die eine Bestellung aufgegeben habenm die von der Versandfirma 'Speedy Express' ausgeliefert wurde.
+# 1. Schreiben Sie eine Abfrage, die Ihnen alle Kundennamen (Companyname) ausgibt, die eine Bestellung aufgegeben habenm die von der Versandfirma 'Speedy Express' ausgeliefert wurde.
 
 SELECT customers.CompanyName
 FROM (( customers JOIN orders ON customers.CustomerID = orders.CustomerID)

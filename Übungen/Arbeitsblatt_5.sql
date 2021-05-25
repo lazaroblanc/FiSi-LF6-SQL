@@ -7,7 +7,7 @@ WHERE	products.CategoryID = 7;
 
 
 # 2. Schreiben Sie eine Abfrage, die die Summe des Warenbestandes (UnitsInStock)
-# der Produkte f�r jede einzelne CategoryId anzeigt
+# der Produkte für jede einzelne CategoryId anzeigt
 
 SELECT products.CategoryID, SUM(products.UnitsInStock) AS 'Summe'
 FROM products
